@@ -117,47 +117,87 @@
     </header>
 
     <!-- Content -->
-    <section class="max-w-4xl mx-auto px-4 pb-24">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-            <div class="order-2 md:order-1">
-                <h2 class="font-serif text-3xl italic text-farm-green mb-6">Come Find Us at the Market!</h2>
-                <p class="text-lg text-gray-600 leading-relaxed font-light mb-8">
-                    Stop by and shop fresh, seasonal blooms straight from the farm!
-                </p>
+    <section class="max-w-6xl mx-auto px-4 pb-24">
+        <h2 class="font-serif text-3xl italic text-farm-green mb-6 text-center md:text-left">Come Find Us at the Market!</h2>
+        <p class="text-lg text-gray-600 leading-relaxed font-light mb-8 text-center md:text-left">
+            Stop by and shop fresh, seasonal blooms straight from the farm!
+        </p>
 
-                <h3 class="font-serif text-2xl italic text-farm-green mb-4">Campbellford Farmers Market</h3>
-                <p class="text-gray-600 font-light mb-6">
-                    <i data-lucide="map-pin" class="w-4 h-4 inline-block text-farm-accent"></i>
-                    Campbellford, Northumberland County
-                </p>
-
-                <div class="overflow-hidden border border-farm-green/10 mb-8">
-                    <table class="w-full text-left">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-stretch mb-16">
+            <div class="order-2 md:order-1 md:col-span-2">
+                <div class="overflow-hidden border border-farm-green/10 h-full flex flex-col">
+                    <table class="w-full text-left h-full">
                         <thead>
                             <tr class="bg-farm-green text-white">
                                 <th class="px-6 py-3 text-xs uppercase tracking-widest font-semibold">Date</th>
-                                <th class="px-6 py-3 text-xs uppercase tracking-widest font-semibold">Time</th>
+                                <th class="px-6 py-3 text-xs uppercase tracking-widest font-semibold whitespace-nowrap">Time</th>
+                                <th class="px-6 py-3 text-xs uppercase tracking-widest font-semibold">Location</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 font-light">
                             <tr class="border-b border-farm-green/10">
-                                <td class="px-6 py-4">Saturday, July 11</td>
-                                <td class="px-6 py-4">9am – 1pm</td>
+                                <td class="px-6 py-4">Thursday, June 18</td>
+                                <td class="px-6 py-4 whitespace-nowrap">3pm – 7pm</td>
+                                <td class="px-6 py-4">East Lynn Park, Toronto</td>
                             </tr>
                             <tr class="border-b border-farm-green/10 bg-white/50">
-                                <td class="px-6 py-4">Saturday, August 15</td>
-                                <td class="px-6 py-4">9am – 1pm</td>
+                                <td class="px-6 py-4">Saturday, July 11</td>
+                                <td class="px-6 py-4 whitespace-nowrap">9am – 1pm</td>
+                                <td class="px-6 py-4">Campbellford</td>
                             </tr>
-                            <tr>
+                            <tr class="border-b border-farm-green/10">
+                                <td class="px-6 py-4">Saturday, August 15</td>
+                                <td class="px-6 py-4 whitespace-nowrap">9am – 1pm</td>
+                                <td class="px-6 py-4">Campbellford</td>
+                            </tr>
+                            <tr class="border-b border-farm-green/10 bg-white/50">
                                 <td class="px-6 py-4">Saturday, September 5</td>
-                                <td class="px-6 py-4">9am – 1pm</td>
+                                <td class="px-6 py-4 whitespace-nowrap">9am – 1pm</td>
+                                <td class="px-6 py-4">Campbellford</td>
+                            </tr>
+                            <tr class="border-b border-farm-green/10">
+                                <td class="px-6 py-4">Thursday, September 17</td>
+                                <td class="px-6 py-4 whitespace-nowrap">3pm – 7pm</td>
+                                <td class="px-6 py-4">East Lynn Park, Toronto</td>
+                            </tr>
+                            <tr class="bg-white/50">
+                                <td class="px-6 py-4">Thursday, October 8</td>
+                                <td class="px-6 py-4 whitespace-nowrap">3pm – 7pm</td>
+                                <td class="px-6 py-4">East Lynn Park, Toronto</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="order-1 md:order-2">
-                <img src="Images/marketbunch.jpeg" alt="Fresh seasonal cut flowers for sale at local Northumberland County farmers market" class="w-full h-[500px] object-cover shadow-xl">
+            <div class="order-1 md:order-2 md:col-span-1">
+                <img src="Images/marketbunch.jpeg" alt="Fresh seasonal cut flowers for sale at local Northumberland County farmers market" class="w-full h-full object-cover shadow-xl">
+            </div>
+        </div>
+
+        <h3 class="font-serif text-3xl italic text-farm-green mb-8 text-center md:text-left">Market Details</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+            <div class="bg-white p-8 shadow-lg border border-farm-green/5">
+                <h4 class="font-serif text-2xl italic text-farm-green mb-4">Campbellford Farmers' Market</h4>
+                <p class="text-gray-600 font-light mb-2">
+                    <i data-lucide="map-pin" class="w-4 h-4 inline-block text-farm-accent"></i>
+                    66 Front Street South, Campbellford
+                </p>
+                <p class="text-gray-600 font-light">
+                    <i data-lucide="link" class="w-4 h-4 inline-block text-farm-accent"></i>
+                    <a href="https://www.facebook.com/CampbellfordFarmersMarket" target="_blank" rel="noopener noreferrer" class="hover:text-farm-accent transition-colors underline">Facebook Page</a>
+                </p>
+            </div>
+
+            <div class="bg-white p-8 shadow-lg border border-farm-green/5">
+                <h4 class="font-serif text-2xl italic text-farm-green mb-4">East Lynn Farmers' Market</h4>
+                <p class="text-gray-600 font-light mb-2">
+                    <i data-lucide="map-pin" class="w-4 h-4 inline-block text-farm-accent"></i>
+                    Toronto (East Lynn Park)
+                </p>
+                <p class="text-gray-600 font-light">
+                    <i data-lucide="link" class="w-4 h-4 inline-block text-farm-accent"></i>
+                    <a href="https://eastlynnparkfarmersmarket.ca" target="_blank" rel="noopener noreferrer" class="hover:text-farm-accent transition-colors underline">eastlynnparkfarmersmarket.ca</a>
+                </p>
             </div>
         </div>
 
