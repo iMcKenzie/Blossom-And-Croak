@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", "BlossomAndCroak", "-p", "8123", "-c-1"],
+      "port": 8123
+    },
+    {
+      "name": "netlify",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "netlify-cli", "dev", "--port", "8888", "--no-open"],
+      "port": 8888
+    }
+  ]
+}

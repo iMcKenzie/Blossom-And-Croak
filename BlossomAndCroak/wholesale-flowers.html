@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wholesale Flowers by the Stem | Blossom & Croak | Codrington, Ontario</title>
+    <meta name="description" content="Wholesale fresh-cut flowers by the stem from our Codrington, Ontario flower farm, for pre-approved customers. Contact us about wholesale access.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'farm-green': '#9E606F',
+                        'farm-light': '#F4E9E8',
+                        'farm-accent': '#D58A94',
+                        'soft-pink': '#C88D94',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(158, 96, 111, 0.3), rgba(158, 96, 111, 0.1));
+        }
+
+        .image-hover-zoom {
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .group:hover .image-hover-zoom {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="bg-farm-light text-farm-green font-sans antialiased selection:bg-farm-green selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-farm-light/95 backdrop-blur-sm border-b border-farm-green/10 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html"
+                        class="font-serif text-3xl italic font-semibold tracking-wider text-farm-green hover:opacity-80 transition-opacity">
+                        Blossom & Croak
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="wholesale-flowers.html"
+                        class="text-sm uppercase tracking-widest text-farm-accent font-semibold transition-colors">Wholesale
+                        Flowers</a>
+                    <a href="diy-buckets.html"
+                        class="text-sm uppercase tracking-widest hover:text-farm-accent transition-colors">DIY
+                        Buckets</a>
+                    <a href="weddings.html"
+                        class="text-sm uppercase tracking-widest hover:text-farm-accent transition-colors">Weddings</a>
+                    <a href="markets.html"
+                        class="text-sm uppercase tracking-widest hover:text-farm-accent transition-colors">Markets</a>
+                    <a href="where-to-find.html"
+                        class="text-sm uppercase tracking-widest hover:text-farm-accent transition-colors">Find
+                        Flowers</a>
+                    <a href="index.html#about"
+                        class="text-sm uppercase tracking-widest hover:text-farm-accent transition-colors">About</a>
+                    <a href="https://www.instagram.com/blossomandcroak/" target="_blank" rel="noopener noreferrer"
+                        class="text-farm-green hover:text-farm-accent transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-farm-green hover:text-farm-accent focus:outline-none">
+                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-farm-light border-t border-farm-green/10 absolute w-full">
+            <div class="px-4 pt-2 pb-8 space-y-4 flex flex-col items-center text-center">
+                <a href="wholesale-flowers.html" class="block px-3 py-2 text-base font-serif italic text-2xl text-farm-accent"
+                    onclick="closeMenu()">Wholesale Flowers</a>
+                <a href="diy-buckets.html" class="block px-3 py-2 text-base font-serif italic text-2xl hover:text-farm-accent"
+                    onclick="closeMenu()">DIY Buckets</a>
+                <a href="weddings.html"
+                    class="block px-3 py-2 text-base font-serif italic text-2xl hover:text-farm-accent"
+                    onclick="closeMenu()">Weddings</a>
+                <a href="markets.html"
+                    class="block px-3 py-2 text-base font-serif italic text-2xl hover:text-farm-accent"
+                    onclick="closeMenu()">Markets</a>
+                <a href="where-to-find.html"
+                    class="block px-3 py-2 text-base font-serif italic text-2xl hover:text-farm-accent"
+                    onclick="closeMenu()">Where to Find Flowers</a>
+                <a href="index.html#about"
+                    class="block px-3 py-2 text-base font-serif italic text-2xl hover:text-farm-accent"
+                    onclick="closeMenu()">About Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="relative pt-48 pb-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="block text-farm-accent uppercase tracking-[0.3em] text-sm md:text-base mb-4">By the
+                Stem</span>
+            <h1 class="text-5xl md:text-7xl font-serif text-farm-green italic mb-8">
+                Wholesale Flowers
+            </h1>
+            <p class="text-lg text-gray-600 leading-relaxed font-light max-w-2xl mx-auto">
+                Fresh-cut stems straight from the farm for our wholesale customers. Add stems to
+                your basket and reserve them all at once. Emma will be in touch to confirm pickup
+                and payment.
+            </p>
+        </div>
+    </header>
+
+    <!-- Password gate -->
+    <section id="gate-section" class="hidden max-w-md mx-auto px-4 pb-24">
+        <div class="bg-white p-10 shadow-xl border border-farm-green/5 text-center">
+            <i data-lucide="lock" class="w-8 h-8 mx-auto text-farm-accent mb-4"></i>
+            <h3 class="font-serif text-2xl italic text-farm-green mb-3">Wholesale Access</h3>
+            <p class="text-sm text-gray-500 font-light mb-8">
+                This page is for pre-approved wholesale customers. Enter the password Emma sent you.
+            </p>
+            <form id="gate-form" class="flex flex-col gap-4">
+                <input id="gate-pass" type="password" placeholder="Password" autocomplete="current-password"
+                    class="px-4 py-3 bg-farm-light border border-farm-green/30 text-farm-green placeholder-gray-400 focus:outline-none focus:border-farm-accent transition-colors text-center">
+                <p id="gate-error" class="hidden text-sm text-red-500 font-light"></p>
+                <button type="submit" id="gate-btn"
+                    class="px-8 py-3 bg-farm-green text-white uppercase tracking-widest text-xs font-semibold hover:bg-farm-accent transition-colors disabled:opacity-50">
+                    Enter
+                </button>
+            </form>
+            <p class="text-xs text-gray-400 mt-8">
+                Interested in wholesale flowers?<br>
+                Email <a href="mailto:blossomandcroak@gmail.com" class="underline hover:text-farm-accent">blossomandcroak@gmail.com</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Shop -->
+    <section class="max-w-6xl mx-auto px-4 pb-24">
+        <!-- Loading state -->
+        <div id="loading-state" class="text-center py-20">
+            <i data-lucide="flower-2" class="w-10 h-10 mx-auto text-farm-accent mb-4 animate-pulse"></i>
+            <p class="text-gray-500 font-light">Gathering today's blooms…</p>
+        </div>
+
+        <!-- Error state -->
+        <div id="error-state" class="hidden text-center py-20">
+            <i data-lucide="cloud-rain" class="w-10 h-10 mx-auto text-farm-accent mb-4"></i>
+            <p class="text-gray-600 font-light mb-6">We couldn't load the flower list just now.</p>
+            <button onclick="loadInventory()"
+                class="px-8 py-3 border border-farm-green text-farm-green uppercase tracking-widest text-xs font-semibold hover:bg-farm-green hover:text-white transition-colors">
+                Try Again
+            </button>
+        </div>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="hidden text-center py-20 bg-white shadow-lg border border-farm-green/5 px-8">
+            <i data-lucide="sprout" class="w-10 h-10 mx-auto text-farm-accent mb-4"></i>
+            <h3 class="font-serif text-3xl italic text-farm-green mb-4">Nothing cut just yet</h3>
+            <p class="text-gray-600 font-light max-w-lg mx-auto mb-8">
+                There are no stems available at the moment — check back soon, or follow us on
+                Instagram to hear when fresh flowers are ready.
+            </p>
+            <a href="https://www.instagram.com/blossomandcroak/" target="_blank" rel="noopener noreferrer"
+                class="inline-block px-10 py-4 bg-farm-green text-white uppercase tracking-widest text-sm font-semibold hover:bg-farm-accent transition-colors">
+                Follow @blossomandcroak
+            </a>
+        </div>
+
+        <!-- Flower grid -->
+        <div id="flower-grid" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </section>
+
+    <!-- Floating basket button -->
+    <button id="basket-button" onclick="openBasket()"
+        class="hidden fixed bottom-6 right-6 z-40 bg-farm-green text-white rounded-full shadow-xl px-6 py-4 items-center gap-3 hover:bg-farm-accent transition-colors">
+        <i data-lucide="shopping-basket" class="w-5 h-5"></i>
+        <span id="basket-count" class="text-sm font-semibold tracking-widest"></span>
+    </button>
+
+    <!-- Basket Modal -->
+    <div id="basket-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center overflow-y-auto p-4">
+        <div class="bg-farm-light p-8 rounded-lg shadow-xl max-w-lg w-full my-8">
+            <div class="flex justify-between items-start mb-6">
+                <h3 class="font-serif text-3xl italic text-farm-green">Your Basket</h3>
+                <button onclick="closeBasket()" class="text-gray-400 hover:text-farm-accent mt-1">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Basket + form view -->
+            <div id="basket-form-view">
+                <div id="basket-items" class="divide-y divide-farm-green/10 mb-2"></div>
+                <div class="flex justify-between items-baseline border-t border-farm-green/20 pt-4 mb-6">
+                    <span class="text-xs uppercase tracking-widest text-gray-500">Estimated total</span>
+                    <span id="basket-total" class="font-serif italic text-2xl text-farm-green"></span>
+                </div>
+
+                <form id="basket-form" class="flex flex-col gap-4">
+                    <input id="reserve-name" type="text" placeholder="Your name" required maxlength="100"
+                        class="px-4 py-3 bg-white border border-farm-green/30 text-farm-green placeholder-gray-400 focus:outline-none focus:border-farm-accent transition-colors">
+                    <input id="reserve-email" type="email" placeholder="Your email address" required maxlength="200"
+                        class="px-4 py-3 bg-white border border-farm-green/30 text-farm-green placeholder-gray-400 focus:outline-none focus:border-farm-accent transition-colors">
+                    <input id="reserve-phone" type="tel" placeholder="Phone (optional)" maxlength="40"
+                        class="px-4 py-3 bg-white border border-farm-green/30 text-farm-green placeholder-gray-400 focus:outline-none focus:border-farm-accent transition-colors">
+                    <textarea id="reserve-note" placeholder="Anything we should know? (optional)" maxlength="500" rows="2"
+                        class="px-4 py-3 bg-white border border-farm-green/30 text-farm-green placeholder-gray-400 focus:outline-none focus:border-farm-accent transition-colors resize-none"></textarea>
+
+                    <p id="reserve-error" class="hidden text-sm text-red-500 font-light"></p>
+
+                    <button type="submit" id="reserve-submit"
+                        class="px-8 py-3 bg-farm-green text-white uppercase tracking-widest text-xs font-semibold hover:bg-farm-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        Reserve My Stems
+                    </button>
+                </form>
+            </div>
+
+            <!-- Success view -->
+            <div id="basket-success-view" class="hidden text-center py-6">
+                <i data-lucide="check-circle-2" class="w-12 h-12 mx-auto text-farm-accent mb-4"></i>
+                <h4 class="font-serif text-2xl italic text-farm-green mb-3">You're all set!</h4>
+                <div id="success-items" class="text-gray-600 font-light mb-4 text-left inline-block"></div>
+                <p class="text-gray-600 font-light mb-6">
+                    Emma will email you to arrange pickup.
+                </p>
+                <button onclick="closeBasket()"
+                    class="px-8 py-3 bg-farm-green text-white uppercase tracking-widest text-xs font-semibold hover:bg-farm-accent transition-colors">
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-farm-light border-t border-farm-green/10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div class="text-center md:text-left">
+                    <h4 class="uppercase tracking-widest text-xs font-semibold text-farm-green mb-6">Contact</h4>
+                    <p class="text-gray-600 font-light mb-1">Emma</p>
+                    <p class="text-gray-600 font-light mb-2">blossomandcroak@gmail.com</p>
+                </div>
+
+                <div class="text-center flex flex-col items-center justify-center">
+                    <a href="index.html" class="font-serif text-2xl italic font-semibold text-farm-green mb-4">Blossom &
+                        Croak</a>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/blossomandcroak/" target="_blank"
+                            class="text-gray-400 hover:text-farm-accent transition-colors">
+                            <i data-lucide="instagram" class="w-6 h-6"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="text-center md:text-right">
+                    <h4 class="uppercase tracking-widest text-xs font-semibold text-farm-green mb-6">Explore</h4>
+                    <ul class="space-y-2">
+                        <li><a href="wholesale-flowers.html" class="text-farm-accent font-semibold">Wholesale Flowers</a></li>
+                        <li><a href="diy-buckets.html" class="text-gray-600 font-light hover:text-farm-accent transition-colors">DIY Buckets</a></li>
+                        <li><a href="weddings.html"
+                                class="text-gray-600 font-light hover:text-farm-accent transition-colors">Weddings</a>
+                        </li>
+                        <li><a href="markets.html"
+                                class="text-gray-600 font-light hover:text-farm-accent transition-colors">Markets</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-farm-green/10 pt-8 text-center">
+                <p class="text-xs text-gray-400 font-light">&copy; 2026 Blossom & Croak Flower Farm. All rights
+                    reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+        function closeMenu() {
+            menu.classList.add('hidden');
+        }
+
+        // ---------------- Wholesale flowers shop ----------------
+        // Demo mode: sample data for local preview (file://) or ?demo=1.
+        const DEMO = new URLSearchParams(location.search).has('demo') || location.protocol === 'file:';
+        const DEMO_FLOWERS = [
+            { id: 'demo-1', name: 'Dahlias', description: 'Big, showy late-summer blooms in warm tones.', pricePerStem: 4.5, qty: 18, image: 'Images/marketbunch.jpeg' },
+            { id: 'demo-2', name: 'Zinnias', description: 'Bright and cheerful, long vase life.', pricePerStem: 2, qty: 40, image: 'Images/bulkblooms.jpg' },
+            { id: 'demo-3', name: 'Snapdragons', description: 'Tall spires, lovely in mixed bouquets.', pricePerStem: 2.5, qty: 0, image: 'Images/market.jpg' },
+        ];
+
+        const BASKET_KEY = 'bc-basket';
+        const SHOP_KEY = 'bc-shop-key';
+        let flowers = [];
+        let basket = loadBasket(); // { flowerId: quantity }
+
+        const $ = (id) => document.getElementById(id);
+
+        function esc(s) {
+            return String(s ?? '').replace(/[&<>"']/g, (c) => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            })[c]);
+        }
+
+        function money(n) {
+            return '$' + Number(n).toFixed(2).replace(/\.00$/, '');
+        }
+
+        function shopKey() {
+            return sessionStorage.getItem(SHOP_KEY) || '';
+        }
+
+        function loadBasket() {
+            try {
+                const raw = JSON.parse(sessionStorage.getItem(BASKET_KEY) || '{}');
+                return typeof raw === 'object' && raw !== null ? raw : {};
+            } catch { return {}; }
+        }
+
+        function saveBasket() {
+            sessionStorage.setItem(BASKET_KEY, JSON.stringify(basket));
+        }
+
+        function flowerById(id) {
+            return flowers.find((f) => f.id === id);
+        }
+
+        // Drop basket entries for flowers that vanished / sold out; clamp the rest.
+        function pruneBasket() {
+            for (const id of Object.keys(basket)) {
+                const f = flowerById(id);
+                if (!f || !f.qty || f.qty <= 0) delete basket[id];
+                else basket[id] = Math.min(basket[id], f.qty);
+            }
+            saveBasket();
+        }
+
+        function basketStems() {
+            return Object.values(basket).reduce((a, b) => a + b, 0);
+        }
+
+        function showState(state) {
+            for (const id of ['gate-section', 'loading-state', 'error-state', 'empty-state', 'flower-grid']) {
+                $(id).classList.toggle('hidden', id !== state);
+            }
+            updateBasketButton();
+        }
+
+        function showGate(message) {
+            const errEl = $('gate-error');
+            if (message) {
+                errEl.textContent = message;
+                errEl.classList.remove('hidden');
+            } else {
+                errEl.classList.add('hidden');
+            }
+            showState('gate-section');
+            lucide.createIcons();
+        }
+
+        async function loadInventory() {
+            showState('loading-state');
+            try {
+                if (DEMO) {
+                    flowers = DEMO_FLOWERS;
+                } else {
+                    const res = await fetch('/api/inventory', { headers: { 'x-shop-key': shopKey() } });
+                    if (res.status === 401) {
+                        sessionStorage.removeItem(SHOP_KEY);
+                        showGate();
+                        return;
+                    }
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    const data = await res.json();
+                    flowers = data.flowers || [];
+                }
+                pruneBasket();
+                renderFlowers();
+                updateBasketButton();
+            } catch (err) {
+                showState('error-state');
+            }
+            lucide.createIcons();
+        }
+
+        // Password gate: verify by loading the inventory with the entered password.
+        $('gate-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const gateBtn = $('gate-btn');
+            gateBtn.disabled = true;
+            gateBtn.textContent = 'Checking…';
+            sessionStorage.setItem(SHOP_KEY, $('gate-pass').value);
+            const res = await fetch('/api/inventory', { headers: { 'x-shop-key': shopKey() } }).catch(() => null);
+            gateBtn.disabled = false;
+            gateBtn.textContent = 'Enter';
+            if (res && res.status === 401) {
+                sessionStorage.removeItem(SHOP_KEY);
+                showGate("That password isn't right — double-check Emma's message.");
+                return;
+            }
+            $('gate-pass').value = '';
+            loadInventory();
+        });
+
+        function renderFlowers() {
+            if (!flowers.length) {
+                showState('empty-state');
+                return;
+            }
+            const grid = $('flower-grid');
+            grid.innerHTML = flowers.map((f) => {
+                const soldOut = !f.qty || f.qty <= 0;
+                const inBasket = basket[f.id] || 0;
+                // What the shopper can still add: availability minus their basket.
+                const remaining = Math.max(0, (f.qty || 0) - inBasket);
+                const img = f.image
+                    ? `<img src="${esc(f.image)}" alt="${esc(f.name)} - fresh cut flowers from Blossom and Croak flower farm" loading="lazy"
+                           class="w-full h-full object-cover image-hover-zoom ${soldOut ? 'grayscale opacity-70' : ''}">`
+                    : `<div class="w-full h-full flex items-center justify-center bg-farm-light">
+                           <i data-lucide="flower-2" class="w-12 h-12 text-farm-accent/50"></i>
+                       </div>`;
+                const controls = soldOut
+                    ? `<button disabled class="mt-auto w-full px-6 py-3 uppercase tracking-widest text-xs font-semibold bg-gray-200 text-gray-400 cursor-not-allowed">Sold Out</button>`
+                    : remaining === 0
+                    ? `<div class="mt-auto">
+                        <button disabled class="w-full h-10 px-3 uppercase tracking-widest text-xs font-semibold bg-farm-light text-farm-accent border border-farm-accent/40 cursor-not-allowed">All in your basket</button>
+                        <p class="text-xs text-farm-accent mt-2 h-4">${inBasket} in your basket</p>
+                       </div>`
+                    : `<div class="mt-auto">
+                        <div class="flex items-center gap-2">
+                            <button type="button" onclick="stepCardQty('${esc(f.id)}', -1)"
+                                class="w-10 h-10 flex-shrink-0 flex items-center justify-center border border-farm-green/30 text-farm-green hover:bg-farm-green hover:text-white transition-colors text-lg leading-none">−</button>
+                            <input id="card-qty-${esc(f.id)}" type="number" min="1" max="${remaining}" value="1" inputmode="numeric"
+                                class="w-14 h-10 text-center bg-farm-light border border-farm-green/30 text-farm-green focus:outline-none focus:border-farm-accent">
+                            <button type="button" onclick="stepCardQty('${esc(f.id)}', 1)"
+                                class="w-10 h-10 flex-shrink-0 flex items-center justify-center border border-farm-green/30 text-farm-green hover:bg-farm-green hover:text-white transition-colors text-lg leading-none">+</button>
+                            <button type="button" id="add-btn-${esc(f.id)}" onclick="addToBasket('${esc(f.id)}')"
+                                class="flex-1 h-10 px-3 bg-farm-green text-white uppercase tracking-widest text-xs font-semibold hover:bg-farm-accent transition-colors whitespace-nowrap">
+                                Add to Basket
+                            </button>
+                        </div>
+                        <p id="in-basket-${esc(f.id)}" class="text-xs text-farm-accent mt-2 h-4">${inBasket ? inBasket + ' in your basket' : ''}</p>
+                       </div>`;
+                return `
+                <div class="group bg-white shadow-lg border border-farm-green/5 overflow-hidden flex flex-col">
+                    <div class="relative h-72 overflow-hidden bg-gray-100">
+                        ${img}
+                        <span class="absolute top-4 right-4 px-3 py-1 text-xs uppercase tracking-widest font-semibold
+                            ${soldOut ? 'bg-gray-600 text-white' : 'bg-white/90 text-farm-green'}">
+                            ${soldOut ? 'Sold out' : remaining === 0 ? 'All in your basket' : esc(remaining) + ' stem' + (remaining === 1 ? '' : 's') + ' left'}
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex items-baseline justify-between mb-2">
+                            <h3 class="font-serif text-2xl italic text-farm-green">${esc(f.name)}</h3>
+                            <span class="text-farm-accent font-semibold whitespace-nowrap ml-3">${money(f.pricePerStem)}<span class="text-xs text-gray-400 font-light"> / stem</span></span>
+                        </div>
+                        ${f.description ? `<p class="text-sm text-gray-600 font-light mb-4">${esc(f.description)}</p>` : ''}
+                        ${controls}
+                    </div>
+                </div>`;
+            }).join('');
+            showState('flower-grid');
+            lucide.createIcons();
+        }
+
+        function clampCardQty(id) {
+            const input = $('card-qty-' + id);
+            const f = flowerById(id);
+            const remaining = f ? Math.max(1, f.qty - (basket[id] || 0)) : 1;
+            let v = parseInt(input.value, 10) || 1;
+            v = Math.max(1, Math.min(v, remaining));
+            input.value = v;
+            return v;
+        }
+
+        function stepCardQty(id, delta) {
+            const input = $('card-qty-' + id);
+            input.value = (parseInt(input.value, 10) || 1) + delta;
+            clampCardQty(id);
+        }
+
+        function addToBasket(id) {
+            const f = flowerById(id);
+            if (!f) return;
+            const qty = clampCardQty(id);
+            basket[id] = Math.min((basket[id] || 0) + qty, f.qty);
+            saveBasket();
+            updateBasketButton();
+            // Re-render so the card badge reflects what's left after this add.
+            renderFlowers();
+            const addBtn = $('add-btn-' + id);
+            if (addBtn) {
+                addBtn.textContent = 'Added ✓';
+                setTimeout(() => {
+                    const b = $('add-btn-' + id);
+                    if (b) b.textContent = 'Add to Basket';
+                }, 1200);
+            }
+        }
+
+        function updateBasketButton() {
+            const gated = !$('gate-section').classList.contains('hidden');
+            const count = basketStems();
+            const button = $('basket-button');
+            const visible = count > 0 && !gated;
+            button.classList.toggle('hidden', !visible);
+            button.classList.toggle('flex', visible);
+            $('basket-count').textContent = count + ' stem' + (count === 1 ? '' : 's');
+        }
+
+        // ---------------- Basket modal ----------------
+        const basketModal = $('basket-modal');
+
+        function openBasket() {
+            pruneBasket();
+            renderBasketItems();
+            $('reserve-error').classList.add('hidden');
+            $('basket-form-view').classList.remove('hidden');
+            $('basket-success-view').classList.add('hidden');
+            basketModal.classList.remove('hidden');
+            basketModal.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        function closeBasket() {
+            basketModal.classList.add('hidden');
+            basketModal.classList.remove('flex');
+        }
+
+        // Close only when the press STARTED on the overlay — otherwise selecting
+        // text in a field and releasing outside the panel would close the modal.
+        let overlayPressStarted = false;
+        basketModal.addEventListener('mousedown', (e) => {
+            overlayPressStarted = e.target === basketModal;
+        });
+        basketModal.addEventListener('click', (e) => {
+            if (e.target === basketModal && overlayPressStarted) closeBasket();
+            overlayPressStarted = false;
+        });
+
+        function renderBasketItems() {
+            const ids = Object.keys(basket);
+            if (!ids.length) {
+                $('basket-items').innerHTML = '<p class="text-gray-500 font-light py-6 text-center">Your basket is empty — add some stems first!</p>';
+                $('basket-total').textContent = money(0);
+                $('reserve-submit').disabled = true;
+                return;
+            }
+            $('reserve-submit').disabled = false;
+            $('basket-items').innerHTML = ids.map((id) => {
+                const f = flowerById(id);
+                const qty = basket[id];
+                return `
+                <div class="py-4 flex items-center gap-3">
+                    <div class="flex-1 min-w-0">
+                        <p class="font-serif text-xl italic text-farm-green truncate">${esc(f.name)}</p>
+                        <p class="text-xs text-gray-500 font-light">${money(f.pricePerStem)} / stem · ${f.qty} available</p>
+                    </div>
+                    <button type="button" onclick="stepBasketQty('${esc(id)}', -1)"
+                        class="w-9 h-9 flex-shrink-0 flex items-center justify-center border border-farm-green/30 text-farm-green hover:bg-farm-green hover:text-white transition-colors text-lg leading-none">−</button>
+                    <input id="basket-qty-${esc(id)}" type="number" min="1" max="${f.qty}" value="${qty}" inputmode="numeric"
+                        onchange="setBasketQty('${esc(id)}', this.value)"
+                        class="w-14 h-9 text-center bg-white border border-farm-green/30 text-farm-green focus:outline-none focus:border-farm-accent">
+                    <button type="button" onclick="stepBasketQty('${esc(id)}', 1)"
+                        class="w-9 h-9 flex-shrink-0 flex items-center justify-center border border-farm-green/30 text-farm-green hover:bg-farm-green hover:text-white transition-colors text-lg leading-none">+</button>
+                    <span class="w-16 text-right font-serif italic text-farm-green">${money(qty * f.pricePerStem)}</span>
+                    <button type="button" onclick="removeFromBasket('${esc(id)}')" class="text-gray-300 hover:text-farm-accent p-1">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                </div>`;
+            }).join('');
+            const total = ids.reduce((sum, id) => sum + basket[id] * flowerById(id).pricePerStem, 0);
+            $('basket-total').textContent = money(total);
+            lucide.createIcons();
+        }
+
+        function setBasketQty(id, value) {
+            const f = flowerById(id);
+            if (!f) return;
+            let v = parseInt(value, 10) || 1;
+            v = Math.max(1, Math.min(v, f.qty));
+            basket[id] = v;
+            saveBasket();
+            renderBasketItems();
+            updateBasketButton();
+            renderFlowers();
+        }
+
+        function stepBasketQty(id, delta) {
+            setBasketQty(id, (basket[id] || 1) + delta);
+        }
+
+        function removeFromBasket(id) {
+            delete basket[id];
+            saveBasket();
+            renderBasketItems();
+            updateBasketButton();
+            renderFlowers();
+        }
+
+        $('basket-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const items = Object.entries(basket).map(([flowerId, quantity]) => ({ flowerId, quantity }));
+            if (!items.length) return;
+            const submitBtn = $('reserve-submit');
+            const errEl = $('reserve-error');
+            errEl.classList.add('hidden');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Reserving…';
+            try {
+                let remaining;
+                if (DEMO) {
+                    await new Promise((r) => setTimeout(r, 600));
+                    remaining = Object.fromEntries(items.map((i) => [i.flowerId, flowerById(i.flowerId).qty - i.quantity]));
+                } else {
+                    const res = await fetch('/api/reserve', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'x-shop-key': shopKey() },
+                        body: JSON.stringify({
+                            items,
+                            name: $('reserve-name').value,
+                            email: $('reserve-email').value,
+                            phone: $('reserve-phone').value,
+                            note: $('reserve-note').value,
+                        }),
+                    });
+                    const data = await res.json().catch(() => ({}));
+                    if (res.status === 401) {
+                        sessionStorage.removeItem(SHOP_KEY);
+                        closeBasket();
+                        showGate('Please enter the password again.');
+                        return;
+                    }
+                    if (!res.ok) {
+                        // Some items sold down: sync local availability and clamp the basket.
+                        if (data.available && typeof data.available === 'object') {
+                            for (const [id, avail] of Object.entries(data.available)) {
+                                const f = flowerById(id);
+                                if (f) f.qty = avail;
+                            }
+                            pruneBasket();
+                            renderFlowers();
+                            renderBasketItems();
+                            updateBasketButton();
+                        }
+                        throw new Error(data.error || 'Something went wrong — please try again.');
+                    }
+                    remaining = data.remaining || {};
+                }
+
+                const reservedLines = items.map((i) => {
+                    const f = flowerById(i.flowerId);
+                    if (f && remaining[i.flowerId] !== undefined) f.qty = remaining[i.flowerId];
+                    return `${i.quantity} × ${f ? f.name : 'stems'}`;
+                });
+                basket = {};
+                saveBasket();
+                pruneBasket();
+                renderFlowers();
+                updateBasketButton();
+                $('success-items').innerHTML = reservedLines
+                    .map((line) => `<p class="mb-1">• ${esc(line)}</p>`)
+                    .join('');
+                $('basket-form-view').classList.add('hidden');
+                $('basket-success-view').classList.remove('hidden');
+                lucide.createIcons();
+            } catch (err) {
+                errEl.textContent = err.message;
+                errEl.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Reserve My Stems';
+            }
+        });
+
+        loadInventory();
+    </script>
+</body>
+
+</html>

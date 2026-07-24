@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Admin | Blossom & Croak</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'farm-green': '#9E606F',
+                        'farm-light': '#F4E9E8',
+                        'farm-accent': '#D58A94',
+                        'soft-pink': '#C88D94',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-farm-light text-farm-green font-sans antialiased">
+
+    <!-- Login view -->
+    <div id="login-view" class="min-h-screen flex items-center justify-center px-4">
+        <div class="bg-white p-10 shadow-xl border border-farm-green/5 max-w-sm w-full text-center">
+            <i data-lucide="flower-2" class="w-10 h-10 mx-auto text-farm-accent mb-4"></i>
+            <h1 class="font-serif text-3xl italic text-farm-green mb-2">Flower Admin</h1>
+            <p class="text-sm text-gray-500 font-light mb-8">Enter your passcode to manage the Wholesale Flowers page.</p>
+            <form id="login-form" class="flex flex-col gap-4">
+                <input id="passcode" type="password" placeholder="Passcode" autocomplete="current-password"
+                    class="px-4 py-3 bg-farm-light border border-farm-green/30 text-farm-green placeholder-gray-400 focus:outline-none focus:border-farm-accent transition-colors text-center">
+                <p id="login-error" class="hidden text-sm text-red-500 font-light"></p>
+                <button type="submit" id="login-btn"
+                    class="px-8 py-3 bg-farm-green text-white uppercase tracking-widest text-xs font-semibold hover:bg-farm-accent transition-colors disabled:opacity-50">
+                    Enter
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard view -->
+    <div id="dash-view" class="hidden min-h-screen">
+        <header class="bg-white border-b border-farm-green/10 sticky top-0 z-40">
+            <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+                <h1 class="font-serif text-2xl italic text-farm-green">Wholesale Flowers Admin</h1>
+                <div class="flex items-center gap-3">
+                    <a href="wholesale-flowers.html" target="_blank"
+                        class="text-xs uppercase tracking-widest text-gray-500 hover:text-farm-accent">View page</a>
+                    <button onclick="logout()"
+                        class="text-xs uppercase tracking-widest text-gray-500 hover:text-farm-accent">Log out</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-4xl mx-auto px-4 py-8 pb-24">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="font-serif text-2xl italic text-farm-green">Available Flowers</h2>
+                <button onclick="openEditor()"
+                    class="px-5 py-2.5 bg-farm-green text-white uppercase tracking-widest text-xs font-semibold hover:bg-farm-accent transition-colors flex items-center gap-2">
+                    <i data-lucide="plus" class="w-4 h-4"></i> Add Flower
+                </button>
+            </div>
+
+            <p id="dash-status" class="hidden mb-4 text-sm font-light px-4 py-3 bg-white border border-farm-green/10"></p>
+
+            <div id="flower-list" class="space-y-4 mb-14"></div>
+
+            <h2 class="font-serif text-2xl italic text-farm-green mb-2">Archive</h2>
+            <p class="text-sm text-gray-400 font-light mb-6">Flowers taken off the page keep their photo and details — bring one back anytime and just set the new quantity.</p>
+            <div id="archive-list" class="space-y-4 mb-14"></div>
+
+            <h2 class="font-serif text-2xl italic text-farm-green mb-6">Recent Reservations</h2>
+            <div id="res-list" class="bg-white shadow border border-farm-green/5 divide-y divide-farm-green/10"></div>
+        </main>
+    </div>
+
+    <!-- Flower editor modal -->
+    <div id="editor-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center overflow-y-auto p-4">
+        <div class="bg-farm-light p-8 rounded-lg shadow-xl max-w-md w-full my-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-serif text-2xl italic text-farm-green" id="editor-title">Add Flower</h3>
+                <button onclick="closeEditor()" class="text-gray-400 hover:text-farm-accent">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <form id="editor-form" class="flex flex-col gap-4">
+                <input id="ed-name" type="text" placeholder="Flower name (e.g. Dahlias)" required maxlength="100"
+                    class="px-4 py-3 bg-white border border-farm-green/30 text-farm-green placeholder-gray-400 focus:outline-none focus:border-farm-accent">
+                <textarea id="ed-description" placeholder="Short description (optional)" maxlength="300" rows="2"
+                    class="px-4 py-3 bg-white border border-farm-green/30 text-farm-green placeholder-gray-400 focus:outline-none focus:border-farm-accent resize-none"></textarea>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Price per stem ($)</label>
+                        <input id="ed-price" type="number" min="0" step="0.01" required inputmode="decimal"
+                            class="w-full px-4 py-3 bg-white border border-farm-green/30 text-farm-green focus:outline-none focus:border-farm-accent">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Stems available</label>
+                        <input id="ed-qty" type="number" min="0" step="1" required inputmode="numeric"
+                            class="w-full px-4 py-3 bg-white border border-farm-green/30 text-farm-green focus:outline-none focus:border-farm-accent">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Photo</label>
+                    <div class="flex items-center gap-4">
+                        <div id="ed-preview" class="w-20 h-20 bg-white border border-farm-green/20 flex items-center justify-center overflow-hidden flex-shrink-0">
+                            <i data-lucide="image" class="w-6 h-6 text-gray-300"></i>
+                        </div>
+                        <label class="px-4 py-2.5 border border-farm-green text-farm-green uppercase tracking-widest text-xs font-semibold hover:bg-farm-green hover:text-white transition-colors cursor-pointer">
+                            Choose Photo
+                            <input id="ed-photo" type="file" accept="image/*" class="hidden">
+                        </label>
+                    </div>
+                    <p id="photo-status" class="text-xs text-gray-400 mt-2"></p>
+                </div>
+                <label class="flex items-center gap-3 text-sm text-gray-600 font-light">
+                    <input id="ed-active" type="checkbox" checked class="w-4 h-4 accent-farm-green">
+                    Show on the Wholesale Flowers page
+                </label>
+
+                <p id="editor-error" class="hidden text-sm text-red-500 font-light"></p>
+
+                <div class="flex gap-3 mt-2">
+                    <button type="submit" id="editor-save"
+                        class="flex-1 px-6 py-3 bg-farm-green text-white uppercase tracking-widest text-xs font-semibold hover:bg-farm-accent transition-colors disabled:opacity-50">
+                        Save
+                    </button>
+                    <button type="button" id="editor-delete" onclick="deleteCurrent()"
+                        class="hidden px-4 py-3 border border-red-300 text-red-400 hover:bg-red-500 hover:border-red-500 hover:text-white transition-colors">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const $ = (id) => document.getElementById(id);
+        const KEY_STORAGE = 'bc-admin-key';
+
+        let flowers = [];
+        let reservations = [];
+        let editingId = null;
+        let uploadedImageKey = null;
+        const qtyTimers = {};
+
+        function esc(s) {
+            return String(s ?? '').replace(/[&<>"']/g, (c) => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            })[c]);
+        }
+
+        function money(n) {
+            return '$' + Number(n).toFixed(2).replace(/\.00$/, '');
+        }
+
+        function adminKey() {
+            return sessionStorage.getItem(KEY_STORAGE) || '';
+        }
+
+        async function api(method, body) {
+            const res = await fetch('/api/admin', {
+                method,
+                headers: {
+                    'x-admin-key': adminKey(),
+                    ...(body ? { 'Content-Type': 'application/json' } : {}),
+                },
+                ...(body ? { body: JSON.stringify(body) } : {}),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (res.status === 401) {
+                logout();
+                throw new Error('Wrong passcode.');
+            }
+            if (!res.ok) throw new Error(data.error || 'Request failed (' + res.status + ')');
+            return data;
+        }
+
+        // ---------------- Login ----------------
+        $('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = $('login-btn');
+            const errEl = $('login-error');
+            errEl.classList.add('hidden');
+            btn.disabled = true;
+            btn.textContent = 'Checking…';
+            sessionStorage.setItem(KEY_STORAGE, $('passcode').value);
+            try {
+                await refresh();
+                $('login-view').classList.add('hidden');
+                $('dash-view').classList.remove('hidden');
+            } catch (err) {
+                sessionStorage.removeItem(KEY_STORAGE);
+                errEl.textContent = err.message;
+                errEl.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Enter';
+            }
+        });
+
+        function logout() {
+            sessionStorage.removeItem(KEY_STORAGE);
+            $('dash-view').classList.add('hidden');
+            $('login-view').classList.remove('hidden');
+            $('passcode').value = '';
+        }
+
+        // ---------------- Dashboard ----------------
+        async function refresh() {
+            const data = await api('GET');
+            flowers = data.flowers || [];
+            reservations = data.reservations || [];
+            renderFlowers();
+            renderReservations();
+        }
+
+        function status(msg, isError) {
+            const el = $('dash-status');
+            el.textContent = msg;
+            el.classList.remove('hidden');
+            el.classList.toggle('text-red-500', !!isError);
+            el.classList.toggle('text-gray-600', !isError);
+            clearTimeout(status._t);
+            status._t = setTimeout(() => el.classList.add('hidden'), 4000);
+        }
+
+        function imageUrlFor(f) {
+            return f.imageKey ? '/api/flower-image?key=' + encodeURIComponent(f.imageKey) : (f.imageUrl || null);
+        }
+
+        function renderFlowers() {
+            const list = $('flower-list');
+            const archiveList = $('archive-list');
+            const active = flowers.filter((f) => f.active !== false);
+            const archived = flowers.filter((f) => f.active === false);
+
+            const thumb = (f) => {
+                const img = imageUrlFor(f);
+                return `
+                    <div class="w-16 h-16 bg-farm-light flex-shrink-0 overflow-hidden flex items-center justify-center">
+                        ${img ? `<img src="${esc(img)}" alt="" class="w-full h-full object-cover">`
+                              : `<i data-lucide="flower-2" class="w-6 h-6 text-farm-accent/50"></i>`}
+                    </div>`;
+            };
+
+            list.innerHTML = !active.length
+                ? '<p class="text-gray-500 font-light bg-white p-6 border border-farm-green/10">Nothing on the page right now — tap "Add Flower" or bring one back from the archive below.</p>'
+                : active.map((f) => `
+                <div class="bg-white shadow border border-farm-green/5 p-5">
+                    <div class="flex items-center gap-4">
+                        ${thumb(f)}
+                        <div class="flex-1 min-w-0">
+                            <p class="font-serif text-2xl italic text-farm-green truncate">${esc(f.name)}</p>
+                            <p class="text-sm text-gray-500 font-light">${money(f.pricePerStem)} / stem</p>
+                        </div>
+                        <button onclick="archiveFlower('${esc(f.id)}')" title="Move to archive"
+                            class="text-gray-400 hover:text-farm-accent p-2">
+                            <i data-lucide="archive" class="w-5 h-5"></i>
+                        </button>
+                        <button onclick="openEditor('${esc(f.id)}')" title="Edit" class="text-gray-400 hover:text-farm-accent p-2">
+                            <i data-lucide="pencil" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-3 mt-5">
+                        <span class="text-xs uppercase tracking-widest text-gray-400 flex-1">Stems available</span>
+                        <button onclick="bumpQty('${esc(f.id)}', -1)"
+                            class="w-12 h-12 flex-shrink-0 border border-farm-green/30 text-farm-green hover:bg-farm-green hover:text-white transition-colors text-xl leading-none">−</button>
+                        <input id="qty-${esc(f.id)}" type="number" value="${f.qty}" min="0" inputmode="numeric"
+                            onchange="setQty('${esc(f.id)}', this.value)"
+                            class="w-20 h-12 text-center text-lg bg-farm-light border border-farm-green/30 text-farm-green focus:outline-none focus:border-farm-accent">
+                        <button onclick="bumpQty('${esc(f.id)}', 1)"
+                            class="w-12 h-12 flex-shrink-0 border border-farm-green/30 text-farm-green hover:bg-farm-green hover:text-white transition-colors text-xl leading-none">+</button>
+                    </div>
+                </div>`).join('');
+
+            archiveList.innerHTML = !archived.length
+                ? '<p class="text-gray-400 font-light bg-white/60 p-6 border border-farm-green/10">Nothing archived yet.</p>'
+                : archived.map((f) => `
+                <div class="bg-white/70 shadow border border-farm-green/5 p-5">
+                    <div class="flex items-center gap-4">
+                        ${thumb(f)}
+                        <div class="flex-1 min-w-0">
+                            <p class="font-serif text-2xl italic text-farm-green truncate">${esc(f.name)}</p>
+                            <p class="text-sm text-gray-500 font-light">${money(f.pricePerStem)} / stem</p>
+                        </div>
+                        <button onclick="openEditor('${esc(f.id)}')" title="Edit" class="text-gray-400 hover:text-farm-accent p-2">
+                            <i data-lucide="pencil" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <button onclick="restoreFlower('${esc(f.id)}')"
+                        class="mt-5 w-full sm:w-auto px-6 py-3 bg-farm-green text-white uppercase tracking-widest text-xs font-semibold hover:bg-farm-accent transition-colors">
+                        Bring Back
+                    </button>
+                </div>`).join('');
+
+            lucide.createIcons();
+        }
+
+        async function archiveFlower(id) {
+            const f = flowers.find((x) => x.id === id);
+            if (!f) return;
+            f.active = false;
+            try {
+                await api('POST', { action: 'save', flower: f });
+                status(`Moved ${f.name} to the archive.`);
+                await refresh();
+            } catch (err) {
+                status('Could not archive: ' + err.message, true);
+                refresh();
+            }
+        }
+
+        function restoreFlower(id) {
+            openEditor(id, true);
+        }
+
+        function bumpQty(id, delta) {
+            const input = $('qty-' + id);
+            input.value = Math.max(0, (parseInt(input.value, 10) || 0) + delta);
+            setQty(id, input.value);
+        }
+
+        // Debounced save so tapping +/+/+ sends one request.
+        function setQty(id, value) {
+            const f = flowers.find((x) => x.id === id);
+            if (!f) return;
+            f.qty = Math.max(0, parseInt(value, 10) || 0);
+            clearTimeout(qtyTimers[id]);
+            qtyTimers[id] = setTimeout(async () => {
+                try {
+                    await api('POST', { action: 'save', flower: f });
+                    status(`Saved — ${f.name}: ${f.qty} stems available.`);
+                } catch (err) {
+                    status('Could not save quantity: ' + err.message, true);
+                    refresh();
+                }
+            }, 700);
+        }
+
+        function renderReservations() {
+            const list = $('res-list');
+            if (!reservations.length) {
+                list.innerHTML = '<p class="text-gray-500 font-light p-6">No reservations yet.</p>';
+                return;
+            }
+            list.innerHTML = reservations.map((r) => {
+                // Basket reservations carry an items array; older test records had a single flower.
+                const items = Array.isArray(r.items) ? r.items : [{ flowerName: r.flowerName, quantity: r.quantity }];
+                const summary = items.map((i) => `${i.quantity} × ${i.flowerName}`).join(', ');
+                return `
+                <div class="p-4">
+                    <div class="flex items-baseline justify-between gap-3">
+                        <p class="text-farm-green font-medium">${esc(summary)}</p>
+                        <p class="text-xs text-gray-400 whitespace-nowrap">${new Date(r.at).toLocaleString('en-CA', { dateStyle: 'medium', timeStyle: 'short' })}</p>
+                    </div>
+                    <p class="text-sm text-gray-600 font-light">${esc(r.name)} · <a class="hover:text-farm-accent underline" href="mailto:${esc(r.email)}">${esc(r.email)}</a>${r.phone ? ' · ' + esc(r.phone) : ''}</p>
+                    ${r.note ? `<p class="text-sm text-gray-400 font-light mt-1">“${esc(r.note)}”</p>` : ''}
+                </div>`;
+            }).join('');
+        }
+
+        // ---------------- Editor ----------------
+        const editorModal = $('editor-modal');
+
+        function openEditor(id, restoring) {
+            editingId = id || null;
+            const f = flowers.find((x) => x.id === id) || {};
+            uploadedImageKey = f.imageKey || null;
+            $('editor-title').textContent = restoring ? 'Bring Back Flower' : id ? 'Edit Flower' : 'Add Flower';
+            $('ed-name').value = f.name || '';
+            $('ed-description').value = f.description || '';
+            $('ed-price').value = f.pricePerStem ?? '';
+            $('ed-qty').value = f.qty ?? '';
+            // When restoring from the archive, pre-tick "show on page" so Emma
+            // only needs to set the fresh quantity and save.
+            $('ed-active').checked = restoring ? true : f.active !== false;
+            $('ed-photo').value = '';
+            $('photo-status').textContent = '';
+            $('editor-error').classList.add('hidden');
+            $('editor-delete').classList.toggle('hidden', !id);
+            const img = id ? imageUrlFor(f) : null;
+            $('ed-preview').innerHTML = img
+                ? `<img src="${esc(img)}" alt="" class="w-full h-full object-cover">`
+                : '<i data-lucide="image" class="w-6 h-6 text-gray-300"></i>';
+            editorModal.classList.remove('hidden');
+            editorModal.classList.add('flex');
+            lucide.createIcons();
+            if (restoring) {
+                const qtyInput = $('ed-qty');
+                qtyInput.focus();
+                qtyInput.select();
+            }
+        }
+
+        function closeEditor() {
+            editorModal.classList.add('hidden');
+            editorModal.classList.remove('flex');
+        }
+
+        // Close only when the press STARTED on the overlay — otherwise selecting
+        // text in a field and releasing outside the panel would close the modal.
+        let overlayPressStarted = false;
+        editorModal.addEventListener('mousedown', (e) => {
+            overlayPressStarted = e.target === editorModal;
+        });
+        editorModal.addEventListener('click', (e) => {
+            if (e.target === editorModal && overlayPressStarted) closeEditor();
+            overlayPressStarted = false;
+        });
+
+        // Resize the chosen photo in the browser so uploads stay small.
+        $('ed-photo').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            $('photo-status').textContent = 'Preparing photo…';
+            try {
+                const dataUrl = await resizeImage(file, 1200, 0.82);
+                $('photo-status').textContent = 'Uploading…';
+                const { imageKey } = await api('POST', { action: 'uploadImage', dataUrl });
+                uploadedImageKey = imageKey;
+                $('ed-preview').innerHTML = `<img src="${esc(dataUrl)}" alt="" class="w-full h-full object-cover">`;
+                $('photo-status').textContent = 'Photo ready ✓';
+            } catch (err) {
+                $('photo-status').textContent = 'Photo upload failed: ' + err.message;
+            }
+        });
+
+        function resizeImage(file, maxSize, quality) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => {
+                    const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+                    const canvas = document.createElement('canvas');
+                    canvas.width = Math.round(img.width * scale);
+                    canvas.height = Math.round(img.height * scale);
+                    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                    resolve(canvas.toDataURL('image/jpeg', quality));
+                    URL.revokeObjectURL(img.src);
+                };
+                img.onerror = () => reject(new Error('Could not read that image.'));
+                img.src = URL.createObjectURL(file);
+            });
+        }
+
+        $('editor-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = $('editor-save');
+            const errEl = $('editor-error');
+            errEl.classList.add('hidden');
+            btn.disabled = true;
+            btn.textContent = 'Saving…';
+            try {
+                await api('POST', {
+                    action: 'save',
+                    flower: {
+                        id: editingId,
+                        name: $('ed-name').value,
+                        description: $('ed-description').value,
+                        pricePerStem: $('ed-price').value,
+                        qty: $('ed-qty').value,
+                        imageKey: uploadedImageKey,
+                        active: $('ed-active').checked,
+                    },
+                });
+                closeEditor();
+                await refresh();
+                status('Saved!');
+            } catch (err) {
+                errEl.textContent = err.message;
+                errEl.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Save';
+            }
+        });
+
+        async function deleteCurrent() {
+            if (!editingId) return;
+            const f = flowers.find((x) => x.id === editingId);
+            if (!confirm(`Delete "${f ? f.name : 'this flower'}" from the list? This can't be undone.`)) return;
+            try {
+                await api('POST', { action: 'delete', id: editingId });
+                closeEditor();
+                await refresh();
+                status('Deleted.');
+            } catch (err) {
+                $('editor-error').textContent = err.message;
+                $('editor-error').classList.remove('hidden');
+            }
+        }
+
+        // Auto-login if a key is already in this session.
+        if (adminKey()) {
+            refresh().then(() => {
+                $('login-view').classList.add('hidden');
+                $('dash-view').classList.remove('hidden');
+            }).catch(() => sessionStorage.removeItem(KEY_STORAGE));
+        }
+    </script>
+</body>
+
+</html>
