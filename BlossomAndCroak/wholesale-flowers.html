@@ -161,6 +161,13 @@
 
     <!-- Shop -->
     <section class="max-w-6xl mx-auto px-4 pb-24">
+        <!-- Search -->
+        <div id="search-bar" class="hidden max-w-md mx-auto mb-10 relative">
+            <i data-lucide="search" class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-farm-accent pointer-events-none"></i>
+            <input id="flower-search" type="text" placeholder="Search flowers…" autocomplete="off"
+                class="w-full pl-12 pr-4 py-3 bg-white border border-farm-green/30 text-farm-green placeholder-gray-400 focus:outline-none focus:border-farm-accent transition-colors">
+        </div>
+
         <!-- Loading state -->
         <div id="loading-state" class="text-center py-20">
             <i data-lucide="flower-2" class="w-10 h-10 mx-auto text-farm-accent mb-4 animate-pulse"></i>
@@ -371,6 +378,7 @@
             for (const id of ['gate-section', 'loading-state', 'error-state', 'empty-state', 'flower-grid']) {
                 $(id).classList.toggle('hidden', id !== state);
             }
+            $('search-bar').classList.toggle('hidden', state !== 'flower-grid');
             updateBasketButton();
         }
 
@@ -435,8 +443,18 @@
                 showState('empty-state');
                 return;
             }
+            // Alphabetical order; a search query floats matches to the top
+            // without hiding the rest.
+            const query = ($('flower-search').value || '').trim().toLowerCase();
+            const isMatch = (f) => !query
+                || f.name.toLowerCase().includes(query)
+                || (f.description || '').toLowerCase().includes(query);
+            const ordered = [...flowers].sort((a, b) => a.name.localeCompare(b.name));
+            const display = query
+                ? [...ordered.filter(isMatch), ...ordered.filter((f) => !isMatch(f))]
+                : ordered;
             const grid = $('flower-grid');
-            grid.innerHTML = flowers.map((f) => {
+            grid.innerHTML = display.map((f) => {
                 const soldOut = !f.qty || f.qty <= 0;
                 const inBasket = basket[f.id] || 0;
                 // What the shopper can still add: availability minus their basket.
@@ -701,6 +719,8 @@
                 submitBtn.textContent = 'Reserve My Stems';
             }
         });
+
+        $('flower-search').addEventListener('input', () => renderFlowers());
 
         loadInventory();
     </script>
