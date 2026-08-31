@@ -241,7 +241,9 @@ async function notifyEmma(r, remaining) {
         text,
       }),
     });
-    return res.ok;
+    if (res.ok) return true;
+    // Resend refused (e.g. domain not verified yet) — fall through to Formspree
+    // so Emma still gets notified.
   }
 
   // Fallback: Formspree (the site already uses it). Set FORMSPREE_ENDPOINT to a
