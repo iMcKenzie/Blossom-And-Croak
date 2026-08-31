@@ -138,8 +138,67 @@ export default async (req) => {
     emailSent = false;
   }
 
-  return Response.json({ ok: true, remaining, emailSent });
+  // Order summary back to the customer (needs Resend configured).
+  let confirmationSent = false;
+  try {
+    confirmationSent = await confirmCustomer(reservation);
+  } catch {
+    confirmationSent = false;
+  }
+
+  return Response.json({ ok: true, remaining, emailSent, confirmationSent });
 };
+
+async function confirmCustomer(r) {
+  const resendKey = process.env.RESEND_API_KEY;
+  if (!resendKey) return false;
+
+  const money = (n) => `$${Number(n || 0).toFixed(2)}`;
+  const totalStems = r.items.reduce((sum, i) => sum + i.quantity, 0);
+  const totalPrice = r.items.reduce((sum, i) => sum + i.quantity * (i.pricePerStem || 0), 0);
+  const lines = r.items.map(
+    (i) =>
+      `  - ${i.quantity} x ${i.flowerName} @ ${money(i.pricePerStem)}/stem = ${money(i.quantity * (i.pricePerStem || 0))}`
+  );
+
+  const text = [
+    `Hi ${r.name},`,
+    ``,
+    `Thanks for your reservation! We've set these stems aside for you:`,
+    ``,
+    ...lines,
+    ``,
+    `Total stems: ${totalStems}`,
+    `Estimated total: ${money(totalPrice)} (payment at pickup)`,
+    r.note ? `` : null,
+    r.note ? `Your note: ${r.note}` : null,
+    ``,
+    `Emma will be in touch shortly to arrange pickup. If anything changes,`,
+    `just reply to this email.`,
+    ``,
+    `Blossom & Croak Flower Farm`,
+    `Codrington, Ontario`,
+    `blossomandcroak@gmail.com · www.blossomandcroak.ca`,
+  ]
+    .filter((line) => line !== null)
+    .join("\n");
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${resendKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: process.env.RESEND_FROM || "Blossom & Croak <onboarding@resend.dev>",
+      to: [r.email],
+      reply_to: process.env.NOTIFY_EMAIL || "blossomandcroak@gmail.com",
+      subject: `Your flower reservation — ${totalStems} stems set aside`,
+      text,
+    }),
+  });
+  return res.ok;
+}
 
 async function notifyEmma(r, remaining) {
   const totalStems = r.items.reduce((sum, i) => sum + i.quantity, 0);

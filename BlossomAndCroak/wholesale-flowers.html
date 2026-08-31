@@ -251,7 +251,7 @@
                 <i data-lucide="check-circle-2" class="w-12 h-12 mx-auto text-farm-accent mb-4"></i>
                 <h4 class="font-serif text-2xl italic text-farm-green mb-3">You're all set!</h4>
                 <div id="success-items" class="text-gray-600 font-light mb-4 text-left inline-block"></div>
-                <p class="text-gray-600 font-light mb-6">
+                <p class="text-gray-600 font-light mb-6" id="success-note">
                     Emma will email you to arrange pickup.
                 </p>
                 <button onclick="closeBasket()"
@@ -656,6 +656,7 @@
             submitBtn.textContent = 'Reserving…';
             try {
                 let remaining;
+                let confirmationSent = false;
                 if (DEMO) {
                     await new Promise((r) => setTimeout(r, 600));
                     remaining = Object.fromEntries(items.map((i) => [i.flowerId, flowerById(i.flowerId).qty - i.quantity]));
@@ -693,6 +694,7 @@
                         throw new Error(data.error || 'Something went wrong — please try again.');
                     }
                     remaining = data.remaining || {};
+                    confirmationSent = data.confirmationSent === true;
                 }
 
                 const reservedLines = items.map((i) => {
@@ -708,6 +710,9 @@
                 $('success-items').innerHTML = reservedLines
                     .map((line) => `<p class="mb-1">• ${esc(line)}</p>`)
                     .join('');
+                $('success-note').textContent = confirmationSent
+                    ? `A confirmation email with your order summary is on its way to ${$('reserve-email').value.trim()}. Emma will be in touch to arrange pickup.`
+                    : 'Emma will email you to arrange pickup.';
                 $('basket-form-view').classList.add('hidden');
                 $('basket-success-view').classList.remove('hidden');
                 lucide.createIcons();
